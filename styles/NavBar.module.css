@@ -1,0 +1,86 @@
+.navbar {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .navbar {
+        width: 100%;
+        height: 5rem;
+        padding: 0;
+        display: block;
+    }
+
+    .navbarUl {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        font-size: large;
+        font-weight: 600;
+    }
+
+    .navbarItem {
+        position: relative;
+        width: 170px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .navbarA {
+        position: relative;
+        text-transform: uppercase;
+        padding: 5px 10px;
+        transition: .5s;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbarItem::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0px;
+        width: 100%;
+        background: black;
+        transition: .3s;
+        left: 0;
+        top: -20px;
+        opacity: 0;
+    }
+
+    .navbarItem:hover::after {
+        opacity: 1;
+        height: 8px;
+        transition: .3s;
+    }
+
+
+    .hoverMenu {
+        margin: auto;
+        position: block;
+        margin-top: -18px;
+        margin-bottom: 50px;
+        height: 50px;
+        width: 80%;
+        max-width: 1024px;
+        background-color: black;
+        color: wheat;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .navbarItemB {
+        position: relative;
+        width: 170px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .navbarItemB:hover {
+        color: grey;
+    }
+}

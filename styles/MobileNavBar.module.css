@@ -1,0 +1,33 @@
+.navbar {
+    position: relative;
+    width: 100%;
+    font-size: 24px;
+
+}
+
+.navbarUl {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.navbarItem {
+    color: black;
+    border-bottom: 2px solid transparent;
+    transition: ease-in-out 0.3s;
+}
+
+.navbarItem:hover {
+    border-bottom: 2px solid grey;
+    color: grey;
+
+}
+
+@media (min-width: 1024px) {
+
+
+    .navbar {
+        display: none;
+    }
+}

@@ -1,0 +1,92 @@
+.header {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.title {
+    align-self: center;
+    font-size: 3rem;
+    font-weight: 900;
+    margin-top: 1rem
+}
+
+.titleWithSection {
+    margin-bottom: 0rem;
+
+}
+
+.sectionTitle {
+    margin-top: 0rem;
+    font-size: 38px;
+    font-weight: bolder;
+    font-style: italic;
+
+}
+
+.divider {
+    min-width: 100%;
+    border-top: 2px solid black;
+}
+
+/*
+    Nav Icon Mobile
+*/
+
+.containerMenuIcon {
+    display: inline-block;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-top: 2rem;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+/* Rotate first bar */
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+/* Fade out the second bar */
+.change .bar2 {
+    opacity: 0;
+}
+
+/* Rotate last bar */
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
+
+@media (min-width: 1024px) {
+    .title {
+        font-size: 6rem;
+        margin-top: 0.88889em;
+
+
+    }
+
+    .sectionTitle {
+        margin-top: 0rem;
+        margin-bottom: 3rem;
+        font-size: 84px;
+        font-weight: bolder;
+        font-style: italic;
+
+    }
+
+    .containerMenuIcon {
+        display: none;
+    }
+}

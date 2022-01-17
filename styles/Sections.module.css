@@ -1,0 +1,96 @@
+.main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.errorContainer {
+    min-height: 45vh;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.goBackHome {
+    font-size: 32px;
+    font-weight: bold;
+
+}
+
+.contentContainer {
+    margin-top: 2rem;
+    min-height: 100%;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1;
+    justify-content: start;
+}
+
+.sectionTitle {
+    margin-top: 1rem;
+    font-size: 38px;
+    font-weight: bolder;
+    font-style: italic;
+
+}
+
+.paginationContainer {
+    justify-self: center;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: baseline;
+    margin-top: 2rem;
+}
+
+.paginationContainer p, .paginationContainer a {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    border-bottom: 3px solid transparent;
+    transition: ease 0.3s;
+}
+
+.paginationContainer a:hover {
+    border-bottom: 3px solid black;
+}
+
+.paginationContainer p {
+    line-height: 0;
+    -webkit-transform: translateY(0em);
+    transform: translateY(0em);
+}
+
+
+
+@media (min-width: 1024px) {
+    .contentContainer {
+        justify-content: center;
+
+    }
+
+    .sectionTitle {
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        font-size: 84px;
+        font-weight: bolder;
+        font-style: italic;
+
+    }
+
+    .postContainer {
+        max-width: 1024px;
+    }
+
+    .paginationContainer p, .paginationContainer a {
+
+        font-size: 24px;
+
+    }
+}

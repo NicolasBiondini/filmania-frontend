@@ -1,0 +1,51 @@
+.footerContainer {
+    width: 100%;
+    margin-top: 5rem;
+    color: black;
+
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.preContainer {
+    width: 90%;
+    border-top: 2px solid black;
+
+}
+
+.socialMediaContainer {
+    height: 200px;
+    width: 100%;
+    max-width: 250px;
+    font-size: 32px;
+    margin: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.socialMediaContainer a:hover {
+    color: grey;
+
+}
+
+.bottomFooter {
+    color: white;
+    height: 2.5rem;
+    background-color: rgb(53, 53, 53);
+    width: 100%;
+    text-align: center;
+}
+
+.bottomFooter a:hover {
+    color: grey;
+}
