@@ -7,13 +7,14 @@
 }
 
 .contentContainer {
+    position: relative;
     margin-top: 2rem;
     width: 90%;
     display: grid;
     grid-template-columns: 1;
     justify-content: center;
     align-items: center;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #141414;
     padding-bottom: 3rem;
 }
 
@@ -29,8 +30,8 @@
 .textContainer blockquote {
     font-style: italic;
     text-align: center;
-    border-top: 1px solid grey;
-    border-bottom: 1px solid grey;
+    border-top: 1px solid #1B1B1B;
+    border-bottom: 1px solid #1B1B1B;
     display: flex;
     flex-direction: column;
     justify-content: center;

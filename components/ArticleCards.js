@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { marked } from "marked";
+import { motion } from "framer-motion";
 
 import styles from "../styles/ArticleCards.module.css";
 
@@ -11,12 +12,35 @@ export default function ArticleCards({
   category,
   slug,
   image,
-  index,
+  notAnimation,
 }) {
+  const easing = [0.6, -0.05, 0.01, 0.99];
+
+  const fadeInUp = {
+    hidden: {
+      y: 20,
+      opacity: 0,
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: easing,
+      },
+    },
+  };
+
   return (
-    <article className={styles.articleContainer}>
-      <Link href={`/${slug}`}>
-        <a>
+    <motion.article
+      whileTap={
+        notAnimation ? null : { scale: 0.95, transition: { duration: 0.2 } }
+      }
+      variants={fadeInUp}
+      className={styles.articleContainer}
+    >
+      <Link href={`/${slug}`} scroll={false}>
+        <a className={styles.articleContainerHover}>
           <span
             dangerouslySetInnerHTML={{ __html: marked(title) }}
             className={styles.articleTitle}
@@ -40,6 +64,6 @@ export default function ArticleCards({
           </div>
         </a>
       </Link>
-    </article>
+    </motion.article>
   );
 }

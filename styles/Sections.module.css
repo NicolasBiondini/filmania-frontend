@@ -7,13 +7,14 @@
 }
 
 .errorContainer {
-    min-height: 45vh;
+    min-height: 50vh;
     margin-left: 4rem;
     margin-right: 4rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .goBackHome {
@@ -24,7 +25,7 @@
 
 .contentContainer {
     margin-top: 2rem;
-    min-height: 100%;
+    min-height: 40vh;
     width: 90%;
     display: grid;
     grid-template-columns: 1;

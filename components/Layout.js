@@ -1,5 +1,7 @@
 import Head from "next/head";
 
+import { motion } from "framer-motion";
+
 export default function Layout({
   title,
   keywords,
@@ -10,7 +12,11 @@ export default function Layout({
   children,
 }) {
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, transition: { duration: 0.4 } }}
+      animate={{ opacity: 1, transition: { duration: 0.4 } }}
+      exit={{ opacity: 0, transition: { duration: 0.4 } }}
+    >
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -27,7 +33,7 @@ export default function Layout({
       </Head>
 
       {children}
-    </>
+    </motion.div>
   );
 }
 

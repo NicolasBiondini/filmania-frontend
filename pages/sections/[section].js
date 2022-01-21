@@ -1,11 +1,7 @@
 import Link from "next/link";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+
+import { motion } from "framer-motion";
 
 import Layout from "../../components/Layout";
 import Header from "../../components/Header";
@@ -15,7 +11,20 @@ import ArticleCards from "../../components/ArticleCards";
 import styles from "../../styles/Sections.module.css";
 
 export default function Section({ error, data, post, section }) {
-  console.log(data);
+  const easing = [0.6, -0.05, 0.01, 0.99];
+
+  const fadeInUpContainer = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        ease: easing,
+        staggerChildren: 0.4,
+      },
+    },
+  };
   return (
     <Layout
       title={
@@ -42,7 +51,13 @@ export default function Section({ error, data, post, section }) {
         ) : (
           <>
             <div className={styles.contentContainer}>
-              <div className={styles.postContainer}>
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={fadeInUpContainer}
+                className={styles.postContainer}
+              >
                 {data.data.map((post) => {
                   return (
                     <ArticleCards
@@ -58,10 +73,11 @@ export default function Section({ error, data, post, section }) {
                     />
                   );
                 })}
-              </div>
+              </motion.div>
               <div className={styles.paginationContainer}>
                 {data.meta.pagination.page !== 1 && (
                   <Link
+                    scroll={false}
                     href={`/sections/${
                       data.data[0].attributes.categories.data[0].attributes.slug
                     }?post=${(post - 2).toString()}`}
@@ -76,6 +92,7 @@ export default function Section({ error, data, post, section }) {
                 {data.meta.pagination.page !==
                   data.meta.pagination.pageCount && (
                   <Link
+                    scroll={false}
                     href={`/sections/${
                       data.data[0].attributes.categories.data[0].attributes.slug
                     }?post=${(post + 2).toString()}`}
@@ -96,7 +113,7 @@ export default function Section({ error, data, post, section }) {
 
 export async function getServerSideProps({ query }) {
   const client = new ApolloClient({
-    uri: "http://localhost:1337/graphql",
+    uri: process.env.BACKEND_URL,
     cache: new InMemoryCache(),
   });
 

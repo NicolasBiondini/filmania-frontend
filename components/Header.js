@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+
 import styles from "../styles/Header.module.css";
 import MobileNavBar from "./MobileNavBar";
 
@@ -18,8 +20,9 @@ export default function Header({ section }) {
         <div className={`${styles.bar2} `}></div>
         <div className={`${styles.bar3} `}></div>
       </div>
-
-      {menu && <MobileNavBar closeMenu={() => setMenu(false)} />}
+      <AnimatePresence initial={false}>
+        {menu && <MobileNavBar closeMenu={() => setMenu(false)} />}
+      </AnimatePresence>
       <Link href="/">
         <a>
           <h1

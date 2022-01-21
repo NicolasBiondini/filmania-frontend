@@ -1,7 +1,7 @@
 .footerContainer {
     width: 100%;
     margin-top: 5rem;
-    color: black;
+    color: #141414;
 
 }
 
@@ -16,7 +16,7 @@
 
 .preContainer {
     width: 90%;
-    border-top: 2px solid black;
+    border-top: 2px solid #141414;
 
 }
 
@@ -33,19 +33,30 @@
     align-items: center;
 }
 
+.socialMediaContainer a {
+    transition: ease-in-out 0.2s;
+
+}
+
 .socialMediaContainer a:hover {
-    color: grey;
+    color: #E1E1E1;
 
 }
 
 .bottomFooter {
-    color: white;
+    color: #F3F3F3;
     height: 2.5rem;
-    background-color: rgb(53, 53, 53);
+    background-color: #1B1B1B;
     width: 100%;
     text-align: center;
+
+}
+
+.bottomFooter a {
+    transition: ease-in-out 0.2s;
+
 }
 
 .bottomFooter a:hover {
-    color: grey;
+    color: #E1E1E1;
 }

@@ -1,15 +1,6 @@
-import { useEffect, useState } from "react";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
-import Head from "next/head";
-import Image from "next/image";
-
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql,
-} from "@apollo/client";
+import { motion } from "framer-motion";
 
 import styles from "../styles/Home.module.css";
 
@@ -18,68 +9,88 @@ import ArticleCards from "../components/ArticleCards";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-export default function Home({ data }) {
-  const [finalData, setFinalData] = useState([]);
+export default function Home({ data, error }) {
+  // Animation config
 
-  useEffect(() => {
-    let realArr = [];
-    for (let i = 0; i < 3; i++) {
-      let prevArr = [];
-      for (let x = 0; x < 11 - 1; x += 3) {
-        if (data[x + i] !== undefined) {
-          prevArr.push(data[x + i]);
-        }
-      }
-      realArr.push(prevArr);
-    }
-    if (realArr[2].length <= realArr[1].length) {
-      let removeAndAdd = realArr[1].pop();
-      realArr[2].push(removeAndAdd);
-    }
-    //finalData[2].push(reversed[9 - 1]);
-    setFinalData(realArr);
-  }, []);
+  const easing = [0.6, -0.05, 0.01, 0.99];
 
-  console.log(finalData);
+  const fadeInUpContainer = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        ease: easing,
+        staggerChildren: 0.6,
+      },
+    },
+  };
+
+  const stagger = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  };
 
   return (
     <Layout>
       <div className={styles.container}>
         <main className={styles.main}>
           <Header />
-          <div className={styles.contentContainer}>
-            {finalData.map((columns, columnIndex) => {
-              return (
-                <div
-                  key={`column-${columnIndex}`}
-                  className={styles.columnsContainer}
-                >
-                  {columns.map((post, index) => {
-                    return (
-                      <ArticleCards
-                        key={post.id}
-                        title={post.attributes.title}
-                        date={post.attributes.date}
-                        shortDescription={post.attributes.shortDescription}
-                        category={
-                          post.attributes.categories.data[0].attributes.name
-                        }
-                        slug={post.attributes.slug}
-                        image={
-                          (columnIndex === 0 || columnIndex === 2) &&
-                          index === 0
-                            ? null
-                            : post.attributes.image.data.attributes.formats
-                                .medium
-                        }
-                        index={index}
-                      />
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </div>
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className={styles.contentContainer}
+          >
+            {!error ? (
+              <>
+                {data.map((columns, columnIndex) => {
+                  return (
+                    <motion.div
+                      variants={fadeInUpContainer}
+                      key={`column-${columnIndex}`}
+                      className={styles.columnsContainer}
+                    >
+                      {columns.map((post, index) => {
+                        return (
+                          <ArticleCards
+                            key={post.id}
+                            title={post.attributes.title}
+                            date={post.attributes.date}
+                            shortDescription={post.attributes.shortDescription}
+                            category={
+                              post.attributes.categories.data[0].attributes.name
+                            }
+                            slug={post.attributes.slug}
+                            image={
+                              (columnIndex === 0 || columnIndex === 2) &&
+                              index === 0
+                                ? null
+                                : post.attributes.image.data.attributes.formats
+                                    .medium
+                            }
+                            index={index}
+                          />
+                        );
+                      })}
+                    </motion.div>
+                  );
+                })}
+              </>
+            ) : (
+              <div className={styles.errorContainer}>
+                {" "}
+                <h1>{data}</h1>
+              </div>
+            )}
+          </motion.div>
         </main>
 
         <Footer />
@@ -89,124 +100,80 @@ export default function Home({ data }) {
 }
 
 export async function getStaticProps() {
-  const client = new ApolloClient({
-    uri: "http://localhost:1337/graphql",
-    cache: new InMemoryCache(),
-  });
+  try {
+    const client = new ApolloClient({
+      uri: process.env.BACKEND_URL,
+      cache: new InMemoryCache(),
+    });
 
-  const { data } = await client.query({
-    query: gql`
-      query indexPosts {
-        posts(sort: ["id:desc"], pagination: { limit: 11 }) {
-          data {
-            id
-            attributes {
-              title
-              slug
-              date
-              shortDescription
-              categories {
-                data {
-                  attributes {
-                    name
+    const { data } = await client.query({
+      query: gql`
+        query indexPosts {
+          posts(sort: ["id:desc"], pagination: { limit: 11 }) {
+            data {
+              id
+              attributes {
+                title
+                slug
+                date
+                shortDescription
+                categories {
+                  data {
+                    attributes {
+                      name
+                    }
                   }
                 }
-              }
-              writers {
-                data {
-                  attributes {
-                    name
+                writers {
+                  data {
+                    attributes {
+                      name
+                    }
                   }
                 }
-              }
-              image {
-                data {
-                  attributes {
-                    formats
+                image {
+                  data {
+                    attributes {
+                      formats
+                    }
                   }
                 }
               }
             }
           }
         }
+      `,
+    });
+
+    let almostFinalData = data.posts.data;
+
+    let realArr = [];
+    for (let i = 0; i < 3; i++) {
+      let prevArr = [];
+      for (let x = 0; x < 11 - 1; x += 3) {
+        if (almostFinalData[x + i] !== undefined) {
+          prevArr.push(almostFinalData[x + i]);
+        }
       }
-    `,
-  });
-
-  const reversed = data.posts.data.slice(0).reverse();
-
-  return {
-    props: {
-      data: data.posts.data,
-    },
-  };
+      realArr.push(prevArr);
+    }
+    if (realArr[2].length <= realArr[1].length) {
+      let removeAndAdd = realArr[1].pop();
+      realArr[2].push(removeAndAdd);
+    }
+    return {
+      props: {
+        data: realArr,
+        error: false,
+      },
+      revalidate: 30,
+    };
+  } catch {
+    return {
+      props: {
+        data: "Lo sentimos, ha ocurrido un error. Intentelo más tarde.",
+        error: true,
+      },
+    };
+  }
 }
-
-/**
-            .slice(0)
-            .reverse()
-
-    <div className={styles.container}>
-      <Head>
-        <title>Filmania</title>
-        <meta name="description" content="Generated by create next app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <Header />
-        <div className={styles.contentContainer}>
-          {data
-            .slice(0)
-            .reverse()
-            .map((post, index) => {
-              return (
-                <ArticleCards
-                  key={post.id}
-                  title={post.attributes.title}
-                  date={post.attributes.date}
-                  shortDescription={post.attributes.shortDescription}
-                  category={post.attributes.categories.data[0].attributes.name}
-                  slug={post.attributes.slug}
-                  image={
-                    index === 0 || index === 2
-                      ? null
-                      : post.attributes.image.data.attributes.formats.medium
-                  }
-                  index={index}
-                />
-              );
-            })}
-          <div className={styles.newsletterContainer}>
-            <h1>Latest podast: </h1>
-          </div>
-        </div>
-      </main>
-
-      <Footer />
-    </div>
-
-
-    {data
-            .slice(0)
-            .reverse()
-            .map((post, index) => {
-              return (
-                <ArticleCards
-                  key={post.id}
-                  title={post.attributes.title}
-                  date={post.attributes.date}
-                  shortDescription={post.attributes.shortDescription}
-                  category={post.attributes.categories.data[0].attributes.name}
-                  slug={post.attributes.slug}
-                  image={
-                    index === 0 || index === 2
-                      ? null
-                      : post.attributes.image.data.attributes.formats.medium
-                  }
-                  index={index}
-                />
-              );
-            })}
-
- */
