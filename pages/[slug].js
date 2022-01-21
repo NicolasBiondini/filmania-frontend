@@ -65,6 +65,7 @@ export default function BlogArticle({ data: data }) {
               }
               src={data[0].attributes.image.data.attributes.formats.medium.url}
               layout="responsive"
+              alt={data[0].attributes.shortDescription}
             />
           </div>
           <article

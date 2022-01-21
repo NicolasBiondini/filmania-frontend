@@ -10,13 +10,13 @@ export default function Footer() {
       <div className={styles.container}>
         <div className={styles.preContainer}>
           <div className={styles.socialMediaContainer}>
-            <a href="/" target="_blank" rel="noopener noreferrer">
+            <a target="_blank" rel="noopener noreferrer">
               <SiInstagram />
             </a>
-            <a href="/" target="_blank" rel="noopener noreferrer">
+            <a target="_blank" rel="noopener noreferrer">
               <SiTiktok />
             </a>
-            <a href="/" target="_blank" rel="noopener noreferrer">
+            <a target="_blank" rel="noopener noreferrer">
               <SiYoutube />
             </a>
           </div>
@@ -25,7 +25,7 @@ export default function Footer() {
         <div className={styles.bottomFooter}>
           <p>
             © Copyright 2022 -{" "}
-            <a href="/" target="_blank" rel="noopener noreferrer">
+            <a target="_blank" rel="noopener noreferrer">
               Nicolás Biondini
             </a>
           </p>
