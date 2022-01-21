@@ -106,7 +106,7 @@ export default function BlogArticle({ data: data }) {
 export async function getStaticPaths() {
   try {
     const client = new ApolloClient({
-      uri: "http://localhost:1337/graphql",
+      uri: process.env.BACKEND_URL,
       cache: new InMemoryCache(),
     });
 
