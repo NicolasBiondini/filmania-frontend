@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <>
       <Header />
-      <Component {...pageProps} canonical={url} key={url} />;
+      <Component {...pageProps} canonical={url} key={url} />
       <Footer />
     </>
   );
