@@ -24,10 +24,6 @@ export default function Section({ error, data, post }) {
     },
   };
 
-  console.log(
-    data.data[0].attributes.categories.data[0].attributes.name + post
-  );
-
   return (
     <Layout
       title={
@@ -48,15 +44,7 @@ export default function Section({ error, data, post }) {
           </Link>
         </div>
       ) : (
-        <motion.div
-          initial={{ opacity: 0, transition: { duration: 0.4 } }}
-          animate={{ opacity: 1, transition: { duration: 0.4 } }}
-          exit={{ opacity: 0, transition: { duration: 0.4 } }}
-          key={
-            data.data[0].attributes.categories.data[0].attributes.name + post
-          }
-          className={styles.contentContainer}
-        >
+        <div className={styles.contentContainer}>
           <motion.div
             initial="hidden"
             animate="visible"
@@ -104,7 +92,7 @@ export default function Section({ error, data, post }) {
               </Link>
             )}
           </div>
-        </motion.div>
+        </div>
       )}
     </Layout>
   );

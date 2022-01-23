@@ -23,82 +23,79 @@ export default function BlogArticle({ data: data }) {
       type={"Article"}
       image={data[0].attributes.image.data.attributes.formats.small.url}
     >
-      <motion.div
+      <motion.article
         initial={{ opacity: 0, transition: { duration: 0.4 } }}
         animate={{ opacity: 1, transition: { duration: 0.4 } }}
         exit={{ opacity: 0, transition: { duration: 0.4 } }}
         key={data[0].attributes.simpleTitle}
+        className={styles.contentContainer}
       >
-        <article className={styles.contentContainer}>
-          <div className={styles.spanContainer}>
-            <span className={styles.date}>
-              {data[0].attributes.writers.data[0] !== undefined
-                ? data[0].attributes.writers.data[0].attributes.name
-                : "Nicolás Biondini"}{" "}
-              /{" "}
-            </span>
-            <span className={styles.date}>{data[0].attributes.date} / </span>
-            <Link
-              href={`/sections/${data[0].attributes.categories.data[0].attributes.slug}`}
-            >
-              <a>
-                <span className={styles.tag}>
-                  {data[0].attributes.categories.data[0].attributes.name}
-                </span>
-              </a>
-            </Link>
-            <span className={styles.finalLine}></span>
-          </div>
-          <span
-            dangerouslySetInnerHTML={{
-              __html: marked(data[0].attributes.title),
-            }}
-            className={styles.title}
-          ></span>
-          <div className={styles.imageContainer}>
-            <Image
-              priority={true}
-              width={
-                data[0].attributes.image.data.attributes.formats.medium.width
-              }
-              height={
-                data[0].attributes.image.data.attributes.formats.medium.height
-              }
-              src={data[0].attributes.image.data.attributes.formats.medium.url}
-              layout="responsive"
-              alt={data[0].attributes.shortDescription}
-            />
-          </div>
-          <article
-            dangerouslySetInnerHTML={{
-              __html: marked(data[0].attributes.content),
-            }}
-            className={styles.textContainer}
-          ></article>
-          <ShareButtons url={"http://localhost:3000" + router} />
-        </article>
-        <div className={styles.relatedPostsContainer}>
-          <h4>Related Posts:</h4>
-          <section className={styles.relatedPosts}>
-            {relatedPosts.map((post) => {
-              return (
-                <ArticleCards
-                  notAnimation={true}
-                  key={post.id}
-                  title={post.attributes.title}
-                  image={post.attributes.image.data.attributes.formats.small}
-                  shortDescription={post.attributes.shortDescription}
-                  date={post.attributes.date}
-                  category={
-                    data[0].attributes.categories.data[0].attributes.name
-                  }
-                  slug={post.attributes.slug}
-                />
-              );
-            })}
-          </section>
+        <div className={styles.spanContainer}>
+          <span className={styles.date}>
+            {data[0].attributes.writers.data[0] !== undefined
+              ? data[0].attributes.writers.data[0].attributes.name
+              : "Nicolás Biondini"}{" "}
+            /{" "}
+          </span>
+          <span className={styles.date}>{data[0].attributes.date} / </span>
+          <Link
+            href={`/sections/${data[0].attributes.categories.data[0].attributes.slug}`}
+          >
+            <a>
+              <span className={styles.tag}>
+                {data[0].attributes.categories.data[0].attributes.name}
+              </span>
+            </a>
+          </Link>
+          <span className={styles.finalLine}></span>
         </div>
-      </motion.div>
+        <span
+          dangerouslySetInnerHTML={{
+            __html: marked(data[0].attributes.title),
+          }}
+          className={styles.title}
+        ></span>
+        <div className={styles.imageContainer}>
+          <Image
+            priority={true}
+            width={
+              data[0].attributes.image.data.attributes.formats.medium.width
+            }
+            height={
+              data[0].attributes.image.data.attributes.formats.medium.height
+            }
+            src={data[0].attributes.image.data.attributes.formats.medium.url}
+            layout="responsive"
+            alt={data[0].attributes.shortDescription}
+          />
+        </div>
+        <article
+          dangerouslySetInnerHTML={{
+            __html: marked(data[0].attributes.content),
+          }}
+          className={styles.textContainer}
+        ></article>
+        <ShareButtons url={"http://localhost:3000" + router} />
+      </motion.article>
+      <div className={styles.relatedPostsContainer}>
+        <h4>Related Posts:</h4>
+        <section className={styles.relatedPosts}>
+          {relatedPosts.map((post) => {
+            return (
+              <ArticleCards
+                notAnimation={true}
+                key={post.id}
+                title={post.attributes.title}
+                image={post.attributes.image.data.attributes.formats.small}
+                shortDescription={post.attributes.shortDescription}
+                date={post.attributes.date}
+                category={data[0].attributes.categories.data[0].attributes.name}
+                slug={post.attributes.slug}
+              />
+            );
+          })}
+        </section>
+      </div>
     </Layout>
   );
 }

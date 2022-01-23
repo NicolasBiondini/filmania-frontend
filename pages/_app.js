@@ -10,17 +10,9 @@ function MyApp({ Component, pageProps, router }) {
         }
       }}
     >
-      <Component {...pageProps} key={router.asPath} />
+      <Component {...pageProps} key={router.asPath} />;
     </AnimatePresence>
   );
 }
 
 export default MyApp;
-
-/**
- * onExitComplete={() => {
-        if (typeof window !== "undefined") {
-          window.scrollTo({ top: 0 });
-        }
-      }}
- */
