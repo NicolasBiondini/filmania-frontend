@@ -6,8 +6,6 @@ import styles from "../styles/Home.module.css";
 
 import Layout from "../components/Layout";
 import ArticleCards from "../components/ArticleCards";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 
 export default function Home({ data, error }) {
   // Animation config
@@ -40,53 +38,60 @@ export default function Home({ data, error }) {
   return (
     <Layout>
       <motion.div
-        variants={stagger}
-        initial="hidden"
-        animate="visible"
-        exit="hidden"
-        className={styles.contentContainer}
+        initial={{ opacity: 0, transition: { duration: 0.4 } }}
+        animate={{ opacity: 1, transition: { duration: 0.4 } }}
+        exit={{ opacity: 0, transition: { duration: 0.4 } }}
+        key={"index"}
       >
-        {!error ? (
-          <>
-            {data.map((columns, columnIndex) => {
-              return (
-                <motion.div
-                  variants={fadeInUpContainer}
-                  key={`column-${columnIndex}`}
-                  className={styles.columnsContainer}
-                >
-                  {columns.map((post, index) => {
-                    return (
-                      <ArticleCards
-                        key={post.id}
-                        title={post.attributes.title}
-                        date={post.attributes.date}
-                        shortDescription={post.attributes.shortDescription}
-                        category={
-                          post.attributes.categories.data[0].attributes.name
-                        }
-                        slug={post.attributes.slug}
-                        image={
-                          (columnIndex === 0 || columnIndex === 2) &&
-                          index === 0
-                            ? null
-                            : post.attributes.image.data.attributes.formats
-                                .medium
-                        }
-                        index={index}
-                      />
-                    );
-                  })}
-                </motion.div>
-              );
-            })}
-          </>
-        ) : (
-          <div className={styles.errorContainer}>
-            {" "}
-            <h1>{data}</h1>
-          </div>
-        )}
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          className={styles.contentContainer}
+        >
+          {!error ? (
+            <>
+              {data.map((columns, columnIndex) => {
+                return (
+                  <motion.div
+                    variants={fadeInUpContainer}
+                    key={`column-${columnIndex}`}
+                    className={styles.columnsContainer}
+                  >
+                    {columns.map((post, index) => {
+                      return (
+                        <ArticleCards
+                          key={post.id}
+                          title={post.attributes.title}
+                          date={post.attributes.date}
+                          shortDescription={post.attributes.shortDescription}
+                          category={
+                            post.attributes.categories.data[0].attributes.name
+                          }
+                          slug={post.attributes.slug}
+                          image={
+                            (columnIndex === 0 || columnIndex === 2) &&
+                            index === 0
+                              ? null
+                              : post.attributes.image.data.attributes.formats
+                                  .medium
+                          }
+                          index={index}
+                        />
+                      );
+                    })}
+                  </motion.div>
+                );
+              })}
+            </>
+          ) : (
+            <div className={styles.errorContainer}>
+              {" "}
+              <h1>{data}</h1>
+            </div>
+          )}
+        </motion.div>
       </motion.div>
     </Layout>
   );
