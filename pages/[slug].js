@@ -16,13 +16,7 @@ export default function BlogArticle({ data: data }) {
     data[0].attributes.categories.data[0].attributes.posts.data;
   const router = useRouter().asPath;
   return (
-    <Layout
-      title={data[0].attributes.simpleTitle}
-      description={data[0].attributes.shortDescription}
-      keywords={data[0].attributes.keywords && data[0].attributes.keywords}
-      type={"Article"}
-      image={data[0].attributes.image.data.attributes.formats.small.url}
-    >
+    <>
       <motion.article
         initial={{ opacity: 0, transition: { duration: 0.4 } }}
         animate={{ opacity: 1, transition: { duration: 0.4 } }}
@@ -96,7 +90,7 @@ export default function BlogArticle({ data: data }) {
           })}
         </section>
       </div>
-    </Layout>
+    </>
   );
 }
 
@@ -222,3 +216,13 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   }
 }
+
+/**
+     <Layout
+      title={data[0].attributes.simpleTitle}
+      description={data[0].attributes.shortDescription}
+      keywords={data[0].attributes.keywords && data[0].attributes.keywords}
+      type={"Article"}
+      image={data[0].attributes.image.data.attributes.formats.small.url}
+    >
+ */

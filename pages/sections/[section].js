@@ -25,17 +25,7 @@ export default function Section({ error, data, post }) {
   };
 
   return (
-    <Layout
-      title={
-        !error
-          ? "Filmanía - " +
-            data.data[0].attributes.categories.data[0].attributes.name
-          : "Filmanía"
-      }
-      section={
-        !error && data.data[0].attributes.categories.data[0].attributes.name
-      }
-    >
+    <>
       {error ? (
         <div className={styles.errorContainer}>
           <h2>{data}</h2>
@@ -97,7 +87,7 @@ export default function Section({ error, data, post }) {
           </div>
         </div>
       )}
-    </Layout>
+    </>
   );
 }
 
@@ -182,3 +172,17 @@ export async function getServerSideProps({ query }) {
     };
   }
 }
+
+/**
+    <Layout
+      title={
+        !error
+          ? "Filmanía - " +
+            data.data[0].attributes.categories.data[0].attributes.name
+          : "Filmanía"
+      }
+      section={
+        !error && data.data[0].attributes.categories.data[0].attributes.name
+      }
+    >
+ */
