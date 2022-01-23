@@ -28,7 +28,7 @@ export default function MobileNavBar({ closeMenu }) {
     >
       <ul className={styles.navbarUl}>
         <Link href="/">
-          <li className={styles.navbarItem}>
+          <li onClick={() => closeMenu()} className={styles.navbarItem}>
             <a className={styles.navbarA}>Home</a>
           </li>
         </Link>
@@ -59,22 +59,22 @@ export default function MobileNavBar({ closeMenu }) {
               className={styles.navbarUl}
             >
               <Link href="/sections/reviews">
-                <li className={styles.navbarItem}>
+                <li onClick={() => closeMenu()} className={styles.navbarItem}>
                   <a className={styles.navbarA}>Reseñas</a>
                 </li>
               </Link>{" "}
               <Link href="/sections/podcast">
-                <li className={styles.navbarItem}>
+                <li onClick={() => closeMenu()} className={styles.navbarItem}>
                   <a className={styles.navbarA}>Podcast</a>
                 </li>
               </Link>{" "}
               <Link href="/sections/noticias">
-                <li className={styles.navbarItem}>
+                <li onClick={() => closeMenu()} className={styles.navbarItem}>
                   <a className={styles.navbarA}>Noticias</a>
                 </li>
               </Link>{" "}
               <Link href="/sections/extras">
-                <li className={styles.navbarItem}>
+                <li onClick={() => closeMenu()} className={styles.navbarItem}>
                   <a className={styles.navbarA}>Extras</a>
                 </li>
               </Link>
@@ -82,13 +82,13 @@ export default function MobileNavBar({ closeMenu }) {
           )}
         </AnimatePresence>
         <Link href="/">
-          <li className={styles.navbarItem}>
+          <li onClick={() => closeMenu()} className={styles.navbarItem}>
             <a className={styles.navbarA}>About</a>
           </li>
         </Link>
 
         <Link href="/">
-          <li className={styles.navbarItem}>
+          <li onClick={() => closeMenu()} className={styles.navbarItem}>
             <a className={styles.navbarA}>Contacto</a>
           </li>
         </Link>

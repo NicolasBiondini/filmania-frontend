@@ -15,7 +15,7 @@ export default function Layout({
   children,
 }) {
   return (
-    <div>
+    <>
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -38,7 +38,7 @@ export default function Layout({
       >
         {children}
       </motion.main>
-    </div>
+    </>
   );
 }
 

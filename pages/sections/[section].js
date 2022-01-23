@@ -35,7 +35,6 @@ export default function Section({ error, data, post }) {
       section={
         !error && data.data[0].attributes.categories.data[0].attributes.name
       }
-      key={data.data[0].attributes.categories.data[0].attributes.name + post}
     >
       {error ? (
         <div className={styles.errorContainer}>
@@ -73,7 +72,6 @@ export default function Section({ error, data, post }) {
           <div className={styles.paginationContainer}>
             {data.meta.pagination.page !== 1 && (
               <Link
-                scroll={false}
                 href={`/sections/${
                   data.data[0].attributes.categories.data[0].attributes.slug
                 }?post=${(post - 2).toString()}`}
@@ -87,7 +85,6 @@ export default function Section({ error, data, post }) {
             </p>
             {data.meta.pagination.page !== data.meta.pagination.pageCount && (
               <Link
-                scroll={false}
                 href={`/sections/${
                   data.data[0].attributes.categories.data[0].attributes.slug
                 }?post=${(post + 2).toString()}`}
