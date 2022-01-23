@@ -42,6 +42,7 @@ export default function Home({ data, error }) {
         initial="hidden"
         animate="visible"
         exit="hidden"
+        key={"index"}
         className={styles.contentContainer}
       >
         {!error ? (

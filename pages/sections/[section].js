@@ -50,6 +50,9 @@ export default function Section({ error, data, post }) {
             animate="visible"
             exit="hidden"
             variants={fadeInUpContainer}
+            key={
+              data.data[0].attributes.categories.data[0].attributes.name + post
+            }
             className={styles.postContainer}
           >
             {data.data.map((post) => {
