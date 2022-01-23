@@ -18,12 +18,7 @@ export default function Layout({
   children,
 }) {
   return (
-    <motion.main
-      initial={{ opacity: 0, transition: { duration: 0.4 } }}
-      animate={{ opacity: 1, transition: { duration: 0.4 } }}
-      exit={{ opacity: 0, transition: { duration: 0.4 } }}
-      className={styles.main}
-    >
+    <main className={styles.main}>
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -41,7 +36,7 @@ export default function Layout({
       <Header section={section} />
       <>{children}</>
       <Footer />
-    </motion.main>
+    </main>
   );
 }
 
@@ -55,3 +50,10 @@ Layout.defaultProps = {
   image: ".com",
   link: "filmania.com",
 };
+
+/**
+ * 
+ *       initial={{ opacity: 0, transition: { duration: 0.4 } }}
+      animate={{ opacity: 1, transition: { duration: 0.4 } }}
+      exit={{ opacity: 0, transition: { duration: 0.4 } }}
+ */
