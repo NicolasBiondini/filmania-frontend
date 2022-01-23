@@ -9,7 +9,13 @@ function MyApp({ Component, pageProps, router }) {
 
   return (
     <>
-      <Header />
+      <Header
+        section={
+          Object.keys(router.query)[0] === "section" &&
+          !pageProps.error &&
+          pageProps.data.data[0].attributes.categories.data[0].attributes.name
+        }
+      />
       <Component {...pageProps} canonical={url} key={url} />
       <Footer />
     </>
