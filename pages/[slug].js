@@ -16,14 +16,15 @@ export default function BlogArticle({ data: data }) {
     data[0].attributes.categories.data[0].attributes.posts.data;
   const router = useRouter().asPath;
   return (
-    <>
-      <motion.article
-        initial={{ opacity: 0, transition: { duration: 0.4 } }}
-        animate={{ opacity: 1, transition: { duration: 0.4 } }}
-        exit={{ opacity: 0, transition: { duration: 0.4 } }}
-        key={data[0].attributes.simpleTitle}
-        className={styles.contentContainer}
-      >
+    <Layout
+      title={data[0].attributes.simpleTitle}
+      description={data[0].attributes.shortDescription}
+      keywords={data[0].attributes.keywords && data[0].attributes.keywords}
+      type={"Article"}
+      image={data[0].attributes.image.data.attributes.formats.small.url}
+      key={data[0].attributes.simpleTitle}
+    >
+      <article className={styles.contentContainer}>
         <div className={styles.spanContainer}>
           <span className={styles.date}>
             {data[0].attributes.writers.data[0] !== undefined
@@ -70,7 +71,7 @@ export default function BlogArticle({ data: data }) {
           className={styles.textContainer}
         ></article>
         <ShareButtons url={"http://localhost:3000" + router} />
-      </motion.article>
+      </article>
       <div className={styles.relatedPostsContainer}>
         <h4>Related Posts:</h4>
         <section className={styles.relatedPosts}>
@@ -90,7 +91,7 @@ export default function BlogArticle({ data: data }) {
           })}
         </section>
       </div>
-    </>
+    </Layout>
   );
 }
 
@@ -216,13 +217,3 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   }
 }
-
-/**
-     <Layout
-      title={data[0].attributes.simpleTitle}
-      description={data[0].attributes.shortDescription}
-      keywords={data[0].attributes.keywords && data[0].attributes.keywords}
-      type={"Article"}
-      image={data[0].attributes.image.data.attributes.formats.small.url}
-    >
- */

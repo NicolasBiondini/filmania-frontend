@@ -1,11 +1,16 @@
 import "../styles/globals.css";
 import { AnimatePresence } from "framer-motion";
-import Layout from "../components/Layout";
+
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 function MyApp({ Component, pageProps, router }) {
   return (
-    <Layout>
+    <>
+      <Header />
       <AnimatePresence
         exitBeforeEnter
+        initial={false}
         onExitComplete={() => {
           if (typeof window !== "undefined") {
             window.scrollTo({ top: 0 });
@@ -14,7 +19,8 @@ function MyApp({ Component, pageProps, router }) {
       >
         <Component {...pageProps} key={router.asPath} />;
       </AnimatePresence>
-    </Layout>
+      <Footer />
+    </>
   );
 }
 
