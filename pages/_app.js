@@ -10,16 +10,7 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <>
       <Header />
-      <AnimatePresence
-        exitBeforeEnter
-        onExitComplete={() => {
-          if (typeof window !== "undefined") {
-            window.scrollTo({ top: 0 });
-          }
-        }}
-      >
-        <Component {...pageProps} canonical={url} key={url} />;
-      </AnimatePresence>
+      <Component {...pageProps} canonical={url} key={url} />;
       <Footer />
     </>
   );
