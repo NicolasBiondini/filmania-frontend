@@ -2,6 +2,11 @@ import Head from "next/head";
 
 import { motion } from "framer-motion";
 
+import Header from "./Header";
+import Footer from "./Footer";
+
+import styles from "../styles/Layout.module.css";
+
 export default function Layout({
   title,
   keywords,
@@ -9,13 +14,15 @@ export default function Layout({
   type,
   image,
   link,
+  section,
   children,
 }) {
   return (
-    <motion.div
+    <motion.main
       initial={{ opacity: 0, transition: { duration: 0.4 } }}
       animate={{ opacity: 1, transition: { duration: 0.4 } }}
       exit={{ opacity: 0, transition: { duration: 0.4 } }}
+      className={styles.main}
     >
       <Head>
         <title>{title}</title>
@@ -31,9 +38,10 @@ export default function Layout({
         <meta property="og:site_name" content="Filmanía" />
         <meta name="viewport" content="width=device-width,initial-scale=1.0" />
       </Head>
-
-      {children}
-    </motion.div>
+      <Header section={section} />
+      <>{children}</>
+      <Footer />
+    </motion.main>
   );
 }
 

@@ -10,7 +10,7 @@ import ArticleCards from "../../components/ArticleCards";
 
 import styles from "../../styles/Sections.module.css";
 
-export default function Section({ error, data, post, section }) {
+export default function Section({ error, data, post }) {
   const easing = [0.6, -0.05, 0.01, 0.99];
 
   const fadeInUpContainer = {
@@ -25,6 +25,9 @@ export default function Section({ error, data, post, section }) {
       },
     },
   };
+
+  console.log(data.data[0].attributes.categories.data[0].attributes.name);
+
   return (
     <Layout
       title={
@@ -33,80 +36,68 @@ export default function Section({ error, data, post, section }) {
             data.data[0].attributes.categories.data[0].attributes.name
           : "Filmanía"
       }
+      section={
+        !error && data.data[0].attributes.categories.data[0].attributes.name
+      }
     >
-      <div className={styles.main}>
-        <Header
-          section={
-            !error && data.data[0].attributes.categories.data[0].attributes.name
-          }
-        />
-
-        {error ? (
-          <div className={styles.errorContainer}>
-            <h2>{data}</h2>
-            <Link href="/">
-              <a className={styles.goBackHome}>Go back to Home.</a>
-            </Link>
-          </div>
-        ) : (
-          <>
-            <div className={styles.contentContainer}>
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={fadeInUpContainer}
-                className={styles.postContainer}
+      {error ? (
+        <div className={styles.errorContainer}>
+          <h2>{data}</h2>
+          <Link href="/">
+            <a className={styles.goBackHome}>Go back to Home.</a>
+          </Link>
+        </div>
+      ) : (
+        <div className={styles.contentContainer}>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={fadeInUpContainer}
+            className={styles.postContainer}
+          >
+            {data.data.map((post) => {
+              return (
+                <ArticleCards
+                  key={post.id}
+                  title={post.attributes.title}
+                  date={post.attributes.date}
+                  shortDescription={post.attributes.shortDescription}
+                  category={post.attributes.categories.data[0].attributes.name}
+                  slug={post.attributes.slug}
+                  image={null}
+                />
+              );
+            })}
+          </motion.div>
+          <div className={styles.paginationContainer}>
+            {data.meta.pagination.page !== 1 && (
+              <Link
+                scroll={false}
+                href={`/sections/${
+                  data.data[0].attributes.categories.data[0].attributes.slug
+                }?post=${(post - 2).toString()}`}
               >
-                {data.data.map((post) => {
-                  return (
-                    <ArticleCards
-                      key={post.id}
-                      title={post.attributes.title}
-                      date={post.attributes.date}
-                      shortDescription={post.attributes.shortDescription}
-                      category={
-                        post.attributes.categories.data[0].attributes.name
-                      }
-                      slug={post.attributes.slug}
-                      image={null}
-                    />
-                  );
-                })}
-              </motion.div>
-              <div className={styles.paginationContainer}>
-                {data.meta.pagination.page !== 1 && (
-                  <Link
-                    scroll={false}
-                    href={`/sections/${
-                      data.data[0].attributes.categories.data[0].attributes.slug
-                    }?post=${(post - 2).toString()}`}
-                  >
-                    <a>Back</a>
-                  </Link>
-                )}
-                <p>
-                  Page {data.meta.pagination.page} of{" "}
-                  {data.meta.pagination.pageCount}
-                </p>
-                {data.meta.pagination.page !==
-                  data.meta.pagination.pageCount && (
-                  <Link
-                    scroll={false}
-                    href={`/sections/${
-                      data.data[0].attributes.categories.data[0].attributes.slug
-                    }?post=${(post + 2).toString()}`}
-                  >
-                    <a>Next</a>
-                  </Link>
-                )}
-              </div>
-            </div>
-          </>
-        )}
-
-        <Footer />
-      </div>
+                <a>Back</a>
+              </Link>
+            )}
+            <p>
+              Page {data.meta.pagination.page} of{" "}
+              {data.meta.pagination.pageCount}
+            </p>
+            {data.meta.pagination.page !== data.meta.pagination.pageCount && (
+              <Link
+                scroll={false}
+                href={`/sections/${
+                  data.data[0].attributes.categories.data[0].attributes.slug
+                }?post=${(post + 2).toString()}`}
+              >
+                <a>Next</a>
+              </Link>
+            )}
+          </div>
+        </div>
+      )}
     </Layout>
   );
 }
