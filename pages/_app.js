@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps, router }) {
           }
         }}
       >
-        <Component {...pageProps} key={url} />;
+        <Component {...pageProps} canonical={url} key={url} />;
       </AnimatePresence>
       <Footer />
     </>

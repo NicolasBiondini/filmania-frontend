@@ -1,9 +1,6 @@
 import Head from "next/head";
 
-import { motion, AnimatePresence } from "framer-motion";
-
-import Header from "./Header";
-import Footer from "./Footer";
+import { motion } from "framer-motion";
 
 import styles from "../styles/Layout.module.css";
 
@@ -14,7 +11,6 @@ export default function Layout({
   type,
   image,
   link,
-  key,
   section,
   children,
 }) {
@@ -24,7 +20,7 @@ export default function Layout({
     exit: { opacity: 0 },
   };
   return (
-    <main className={styles.main} key={key}>
+    <div>
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -39,8 +35,15 @@ export default function Layout({
         <meta property="og:site_name" content="Filmanía" />
         <meta name="viewport" content="width=device-width,initial-scale=1.0" />
       </Head>
-      {children}
-    </main>
+      <motion.main
+        initial={{ opacity: 0, transition: { duration: 0.4 } }}
+        animate={{ opacity: 1, transition: { duration: 0.4 } }}
+        exit={{ opacity: 0, transition: { duration: 0.4 } }}
+        className={styles.main}
+      >
+        {children}
+      </motion.main>
+    </div>
   );
 }
 

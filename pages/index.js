@@ -36,7 +36,7 @@ export default function Home({ data, error }) {
   };
 
   return (
-    <Layout key="index">
+    <Layout>
       <motion.div
         variants={stagger}
         initial="hidden"

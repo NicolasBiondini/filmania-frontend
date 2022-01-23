@@ -45,15 +45,7 @@ export default function Section({ error, data, post }) {
           </Link>
         </div>
       ) : (
-        <motion.div
-          initial={{ opacity: 0, transition: { duration: 0.4 } }}
-          animate={{ opacity: 1, transition: { duration: 0.4 } }}
-          exit={{ opacity: 0, transition: { duration: 0.4 } }}
-          className={styles.contentContainer}
-          key={
-            data.data[0].attributes.categories.data[0].attributes.name + post
-          }
-        >
+        <div className={styles.contentContainer}>
           <motion.div
             initial="hidden"
             animate="visible"
@@ -104,7 +96,7 @@ export default function Section({ error, data, post }) {
               </Link>
             )}
           </div>
-        </motion.div>
+        </div>
       )}
     </Layout>
   );
