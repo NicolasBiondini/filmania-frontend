@@ -19,20 +19,12 @@ export default function Layout({
   children,
 }) {
   const variants = {
-    hidden: { opacity: 0, x: -200, y: 0 },
-    enter: { opacity: 1, x: 0, y: 0 },
-    exit: { opacity: 0, x: 0, y: -100 },
+    hidden: { opacity: 0 },
+    enter: { opacity: 1 },
+    exit: { opacity: 0 },
   };
   return (
-    <motion.main
-      variants={variants} // Pass the variant object into Framer Motion
-      initial="hidden" // Set the initial state to variants.hidden
-      animate="enter" // Animated state to variants.enter
-      exit="exit" // Exit state (used later) to variants.exit
-      transition={{ type: "linear" }} // Set the transition to linear
-      className={styles.main}
-      key={key}
-    >
+    <main className={styles.main} key={key}>
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -48,7 +40,7 @@ export default function Layout({
         <meta name="viewport" content="width=device-width,initial-scale=1.0" />
       </Head>
       {children}
-    </motion.main>
+    </main>
   );
 }
 
