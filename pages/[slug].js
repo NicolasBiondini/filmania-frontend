@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -15,19 +16,27 @@ export default function BlogArticle({ data: data }) {
     data[0].attributes.categories.data[0].attributes.posts.data;
   const router = useRouter().asPath;
 
-  if (data[0].attributes.image.data.attributes.formats.medium !== undefined) {
-    let image = {
-      width: data[0].attributes.image.data.attributes.formats.medium.width,
-      height: data[0].attributes.image.data.attributes.formats.medium.height,
-      url: data[0].attributes.image.data.attributes.formats.medium.url,
-    };
-  } else {
-    let image = {
-      width: data[0].attributes.image.data.attributes.formats.small.width,
-      height: data[0].attributes.image.data.attributes.formats.small.height,
-      url: data[0].attributes.image.data.attributes.formats.small.url,
-    };
-  }
+  const [image, setImage] = useState({
+    width: data[0].attributes.image.data.attributes.formats.small.width,
+    height: data[0].attributes.image.data.attributes.formats.small.height,
+    url: data[0].attributes.image.data.attributes.formats.small.url,
+  });
+
+  useEffect(() => {
+    if (data[0].attributes.image.data.attributes.formats.medium !== undefined) {
+      setImage({
+        width: data[0].attributes.image.data.attributes.formats.medium.width,
+        height: data[0].attributes.image.data.attributes.formats.medium.height,
+        url: data[0].attributes.image.data.attributes.formats.medium.url,
+      });
+    } else {
+      setImage({
+        width: data[0].attributes.image.data.attributes.formats.small.width,
+        height: data[0].attributes.image.data.attributes.formats.small.height,
+        url: data[0].attributes.image.data.attributes.formats.small.url,
+      });
+    }
+  }, []);
 
   return (
     <Layout

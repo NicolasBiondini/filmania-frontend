@@ -149,10 +149,7 @@ export async function getStaticProps() {
       }
       realArr.push(prevArr);
     }
-    if (realArr[2].length <= realArr[1].length) {
-      let removeAndAdd = realArr[1].pop();
-      realArr[2].push(removeAndAdd);
-    }
+
     return {
       props: {
         data: realArr,
@@ -169,3 +166,10 @@ export async function getStaticProps() {
     };
   }
 }
+
+/**
+ *     if (realArr[2].length <= realArr[1].length) {
+      let removeAndAdd = realArr[1].pop();
+      realArr[2].push(removeAndAdd);
+    }
+ */
