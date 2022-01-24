@@ -14,6 +14,21 @@ export default function BlogArticle({ data: data }) {
   const relatedPosts =
     data[0].attributes.categories.data[0].attributes.posts.data;
   const router = useRouter().asPath;
+
+  if (data[0].attributes.image.data.attributes.formats.medium !== undefined) {
+    let image = {
+      width: data[0].attributes.image.data.attributes.formats.medium.width,
+      height: data[0].attributes.image.data.attributes.formats.medium.height,
+      url: data[0].attributes.image.data.attributes.formats.medium.url,
+    };
+  } else {
+    let image = {
+      width: data[0].attributes.image.data.attributes.formats.small.width,
+      height: data[0].attributes.image.data.attributes.formats.small.height,
+      url: data[0].attributes.image.data.attributes.formats.small.url,
+    };
+  }
+
   return (
     <Layout
       title={data[0].attributes.simpleTitle}
@@ -51,13 +66,9 @@ export default function BlogArticle({ data: data }) {
         <div className={styles.imageContainer}>
           <Image
             priority={true}
-            width={
-              data[0].attributes.image.data.attributes.formats.medium.width
-            }
-            height={
-              data[0].attributes.image.data.attributes.formats.medium.height
-            }
-            src={data[0].attributes.image.data.attributes.formats.medium.url}
+            width={image.width}
+            height={image.height}
+            src={image.url}
             layout="responsive"
             alt={data[0].attributes.shortDescription}
           />
