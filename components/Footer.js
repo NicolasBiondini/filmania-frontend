@@ -10,13 +10,25 @@ export default function Footer() {
       <div className={styles.container}>
         <div className={styles.preContainer}>
           <div className={styles.socialMediaContainer}>
-            <a target="_blank" rel="noopener noreferrer">
+            <a
+              target="_blank"
+              href="https://www.instagram.com/filmania_ok/"
+              rel="noopener noreferrer"
+            >
               <SiInstagram />
             </a>
-            <a target="_blank" rel="noopener noreferrer">
+            <a
+              target="_blank"
+              href="https://www.tiktok.com/@filmania_ok"
+              rel="noopener noreferrer"
+            >
               <SiTiktok />
             </a>
-            <a target="_blank" rel="noopener noreferrer">
+            <a
+              target="_blank"
+              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
+              rel="noopener noreferrer"
+            >
               <SiYoutube />
             </a>
           </div>
@@ -25,7 +37,11 @@ export default function Footer() {
         <div className={styles.bottomFooter}>
           <p>
             © Copyright 2022 -{" "}
-            <a target="_blank" rel="noopener noreferrer">
+            <a
+              target="_blank"
+              href="https://nicolasbiondini.com/"
+              rel="noopener noreferrer"
+            >
               Nicolás Biondini
             </a>
           </p>

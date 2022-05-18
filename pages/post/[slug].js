@@ -6,10 +6,10 @@ import { useRouter } from "next/router";
 import { marked } from "marked";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
-import Layout from "../components/Layout";
-import ArticleCards from "../components/ArticleCards";
-import ShareButtons from "../components/ShareButtons";
-import styles from "../styles/BlogArticle.module.css";
+import Layout from "../../components/Layout";
+import ArticleCards from "../../components/ArticleCards";
+import ShareButtons from "../../components/ShareButtons";
+import styles from "../../styles/BlogArticle.module.css";
 
 export default function BlogArticle({ data: data }) {
   const relatedPosts =
@@ -88,7 +88,7 @@ export default function BlogArticle({ data: data }) {
           }}
           className={styles.textContainer}
         ></article>
-        <ShareButtons url={"http://localhost:3000" + router} />
+        <ShareButtons url={"https://filmania-frontend.vercel.app/" + router} />
       </article>
       <div className={styles.relatedPostsContainer}>
         <h4>Related Posts:</h4>

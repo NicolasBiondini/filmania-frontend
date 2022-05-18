@@ -1,0 +1,16 @@
+.container {
+    margin-top: 1rem;
+    width: 90%;
+    max-width: 1440px;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+@media (min-width : 1024px) {
+    .textContainer {
+        font-size: 24px;
+    }
+}

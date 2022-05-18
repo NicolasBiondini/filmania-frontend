@@ -86,12 +86,6 @@ export default function MobileNavBar({ closeMenu }) {
             <a className={styles.navbarA}>About</a>
           </li>
         </Link>
-
-        <Link href="/">
-          <li onClick={() => closeMenu()} className={styles.navbarItem}>
-            <a className={styles.navbarA}>Contacto</a>
-          </li>
-        </Link>
       </ul>
     </motion.div>
   );

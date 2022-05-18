@@ -39,7 +39,7 @@ export default function ArticleCards({
       variants={fadeInUp}
       className={styles.articleContainer}
     >
-      <Link href={`/${slug}`}>
+      <Link href={`/post/${slug}`}>
         <a className={styles.articleContainerHover}>
           <span
             dangerouslySetInnerHTML={{ __html: marked(title) }}

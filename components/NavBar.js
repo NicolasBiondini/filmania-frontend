@@ -22,15 +22,9 @@ export default function NavBar() {
           </li>
         </Link>
 
-        <Link href="/">
+        <Link href="/About">
           <li className={styles.navbarItem}>
             <a className={styles.navbarA}>About</a>
-          </li>
-        </Link>
-
-        <Link href="/">
-          <li className={styles.navbarItem}>
-            <a className={styles.navbarA}>Contacto</a>
           </li>
         </Link>
       </ul>
