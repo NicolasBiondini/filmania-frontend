@@ -15,7 +15,7 @@ const About = () => {
           </p>
           <p>
             Como buenos amantes del cine trataremos de abarcar todo tipo de
-            peliculas, desde las más "pochocleras", hasta las más desconocidas.
+            peliculas, desde las más 'pochocleras', hasta las más desconocidas.
           </p>
           <p>
             Agradecemos profundamente tu visita y te animamos a que nos sigas en
