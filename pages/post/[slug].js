@@ -36,7 +36,7 @@ export default function BlogArticle({ data: data }) {
         url: data[0].attributes.image.data.attributes.formats.small.url,
       });
     }
-  }, []);
+  }, [image]);
 
   return (
     <Layout
